@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<h1 id="h01">반갑습니다!</h1>
+	<button id="b01">인사말 변경</button>
+	<script>
+		const h01 = document.querySelector("#h01")
+		const b01 = document.querySelector("#b01")
+		b01.addEventListener("click", () => {
+			h01.textContent = "안녕하세요!"
+		})
+	</script>
+</body>
+</html>
