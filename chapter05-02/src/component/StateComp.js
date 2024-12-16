@@ -8,7 +8,12 @@ import { useState } from "react";
 // 두번째 요소 setLight는 State변수의 값을 변경하는(상태를 업데이트하는) 함수 -> Set함수
 
 // set 함수로 State값 변경
+
+// set 함수를 호출해 state값을 변경하면, 변경값을 페이지에 반영하기 위해 컴포넌트를 다시 렌더링한다. 리액트에서는 이를 컴포넌트의 업데이터라고 한다.
+// 컴포넌트가 페이지에 렌더링하는 값은 컴포넌트 함수의 반환값이다. 따라서, 컴포넌트를 다시 렌더링한다고 함은 컴포넌트 함수를 다시 호출한다는 의미이다.
+
 function StateComp() {
+	console.log("Update");
 	const [count, setCount] = useState(0)
 	function onIncrease() {
 		setCount(count + 1)

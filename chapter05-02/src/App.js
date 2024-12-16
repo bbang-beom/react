@@ -1,6 +1,9 @@
 import './App.css';
 import Body from './component/Body';
 import EventObj from './component/EventObj';
+import Focus from './component/Focus';
+import ManyInput from './component/ManyInput';
+import RefHook from './component/RefHook';
 import StateComp from './component/StateComp';
 
 // 이벤트 처리
@@ -29,6 +32,11 @@ function App() {
       <Body/>
       <EventObj/>
       <StateComp/>
+      {/* <InputManage/> */}
+      <ManyInput/>
+      {/* <PropsState/> */}
+      <RefHook/>
+      <Focus/>
     </div>
   );
 }
