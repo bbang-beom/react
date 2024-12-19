@@ -1,4 +1,4 @@
-import { useReducer, useRef } from 'react';
+import { useCallback, useReducer, useRef } from 'react';
 import './App.css';
 import Header from './component/Header';
 import TestComp01 from './component/TestComp01';
@@ -43,23 +43,26 @@ function reducer(state, action) {
         return state
     }
 }
+// App컴포넌트의 함수 onUpdate와 onDelete를 useCallback으로 메모이제이션해 이 함수들을 다시 생성하지 않도록 만든다.
+// 다시 말해 TodoItem이 불필요한 상황에서 리렌더되지 않도록한다.
 function App() {
   const [todo, dispatch] = useReducer(reducer, mockTodo)
   const idRef = useRef(3)
 
-  const onDelete = (targetId) => {
+  const onDelete = useCallback((targetId) => {
     dispatch({
       type:"DELETE",
       targetId,
     })
-  }
+  },[])
 
-  const onUpdate = (targetId) => {
+
+  const onUpdate =  useCallback((targetId) => {
     dispatch({
       type:"UPDATE",
       targetId,
     })
-  }
+  }, [])
   // 할 일 아이템 추가
   // dispatch를 호출, 인수로 할 일 정보를 담은 action객체 전달
   const onCreate = (content) => {
@@ -84,7 +87,10 @@ function App() {
   //   setTodo([newItem, ...todo])
   //   idRef.current += 1
   // }
-  
+
+  // useReducer가 반환하는 함수 dispatch는 함수 reducer를 호출하는데, 이 reducer는 항상 최신 State를 인수로 받는다.
+  // 따라서 State 관리 도구로 useState가 아닌 useReducer를 이용할 때는 함수형 업데이트를 사용하지 않아도 된다.
+  // 따라서 TodoItem 컴포넌트에 함수로 전달되는 Props인 onUpdate와 onDelete만 다시 생성하지 않도록 useCallback을 이용해 최적화한다.
   return (
     <div className="App">
       <TestComp01/>

@@ -1,7 +1,9 @@
-import { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import "./TodoEditor.css"
 
-const TodoEditor = ({onCreate}) => {
+//. TodoEditor 컴포넌트에 데이터 공급
+const TodoEditor = () => {
+	const {onCreate} = useContext(TodoContext)
 	const [content, setContent] = useState("")
 	const inputRef = useRef()
 	const onChangeContent = (e) => {
